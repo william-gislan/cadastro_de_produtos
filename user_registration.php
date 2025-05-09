@@ -49,6 +49,7 @@
 
             if($num_registers == 1){
                 echo "Usuário já existe";
+                
             }  else {
 
                 $insert_user = "INSERT INTO usuarios ( name,  email, password) VALUES ($1, $2, $3)";

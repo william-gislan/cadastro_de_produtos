@@ -20,7 +20,7 @@
             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
           </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
-        <a href="user_registration.php">Cadastrar</a>
+        <a href="user_registration.php" class="btn btn-primary">Cadastrar</a>
       </form>
 
       <?php 
@@ -30,9 +30,9 @@
 
           require_once "./connection/connection.php";
           
-          $sql = "SELECT * FROM usuarios WHERE email = $1 AND password = $2;";
+          $sql = "SELECT * FROM usuarios WHERE email = $1";
 
-          $param = [$email, $password];
+          $param = [$email];
 
           $result = pg_query_params($conn, $sql, $param);
 
@@ -40,11 +40,11 @@
 
           if($_num_registers == 1){
             $line = pg_fetch_assoc($result);
-
-            if($email == $line['email'] and $password == $line['password']){
+            $passsword_verify = password_verify($password, $line['password']);
+            if($email == $line['email'] and $passsword_verify){
               session_start();
               $_SESSION['email'] = $line['email'];
-              header("location:access");
+              header("location:restrict");
             } else {
               echo "Login inválido";
             }
@@ -54,7 +54,6 @@
         }
       ?>
         </div>
-      
     </div>
 </body>
 </html>
