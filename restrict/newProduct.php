@@ -8,6 +8,14 @@
 </head>
 <body>
     <header>
+
+    <?php 
+        require_once "../connection/connection.php";
+
+        $sql = "SELECT name FROM tbGroup ORDER BY name";
+
+        $dados = pg_query($conn, $sql);
+    ?>
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="newProduct.php">Cadastar Produto</a>
@@ -18,8 +26,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Pesquisar Produto</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Sair</a>
+             <li class="nav-item">
+                <a href="../logout.php" class="nav-link">Sair</a>
             </li>
         </ul>
     </header>
@@ -27,39 +35,74 @@
         <form class="row gx-3 gy-2 align-items-center" action="newProduct.php" method="POST">
             <div class="col-sm-3">
                 <label class="visually-hidden" for="specificSizeInputName">Name</label>
-                <input type="text" class="form-control" id="specificSizeInputName" placeholder="Nome do Produto">
+                <input type="text" class="form-control" id="specificSizeInputName" placeholder="Nome do Produto" name="produto">
             </div>
             <div class="col-sm-3">
                 <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
                 <div class="input-group">
-                <input type="text" class="form-control" id="specificSizeInputGroupUsername" placeholder="Preço">
+                <input type="number" class="form-control" id="specificSizeInputGroupUsername" placeholder="Preço" name="preco">
             </div>
             </div>
             <div class="col-sm-3">
                 <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-                <select class="form-select" id="specificSizeSelect">
+                <select class="form-select" id="specificSizeSelect" name="grupoProduto">
 <!--
     codigo PHP para listar os grupos de produtos    
 -->
                 <option selected>Grupo...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+
+                <?php 
+                   while($rows = pg_fetch_assoc($dados)){
+                    $name = $rows["name"];
+                    $id = $rows["id"];
+
+                    print
+                    "
+                    <option value=$id>$name</option>
+            
+                    ";
+                   }
+                ?>
             </select>
             </div>
             <div class="col-auto">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
-                <label class="form-check-label" for="autoSizingCheck2">
-                 Remember me
-            </label>
+           
     </div>
-  </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+    </form>
 
     </div>
+
+    <?php 
+       if(isset($_POST["produto"])){
+        $product = $_POST["produto"];
+        $price = $_POST["preco"]; 
+        $group_product = $_POST["grupoProduto"];
+
+        $verify_product = "SELECT id, name FROM tbProducts WHERE name = $1";
+
+       $name_param = [$product];
+
+       $result_product = pg_query_params($conn, $verify_product, $name_param);
+
+       $num_registers = pg_num_rows($result_product);
+
+       if($num_registers == 1){
+            echo "Já existe esse produto";
+       } else {
+            $insert_product =   "INSERT INTO tbProducts (name, price, group_product) VALUES ($1, $2, $3)";
+
+            $params = [$product, $price, $group_product];
+
+            $create_Product = pg_query_params($conn, $insert_product, $params);
+
+            echo "Cadastrado com sucesso";
+       }
+       }    
+       
+       
+    ?>
 </body>
 </html>

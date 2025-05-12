@@ -7,8 +7,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 </head>
 <body>
-  
-    <header>
+    <div class="container" style="display: flex; flex-direction:column; align-items:center; gap:1rem">
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="newProduct.php">Cadastar Produto</a>
@@ -17,16 +16,24 @@
                 <a class="nav-link" href="newGroup.php">Cadastrar Grupo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search_produtc.php">Pesquisar Produto</a>
+                <a class="nav-link" href="#">Pesquisar Produto</a>
             </li>
-            <li class="nav-item">
+             <li class="nav-item">
                 <a href="../logout.php" class="nav-link">Sair</a>
             </li>
         </ul>
-    </header>
+    </head>
 
-    <section>
-
-    </section>
+     <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <form class="d-flex" role="search" action="pesquisa.php" method="POST">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="busca" autofocus/>
+                        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                    </form>
+                </div>
+            </nav>
+    </div>
+  
+         
 </body>
 </html>
