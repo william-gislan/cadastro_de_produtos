@@ -24,8 +24,8 @@
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                 </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
-                <a href="user_registration.php">Cadastrar</a>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <a href="index.php">Voltar</a>
             </form>
         </div>
       <?php 
