@@ -12,7 +12,7 @@
     <?php 
         require_once "../connection/connection.php";
 
-        $sql = "SELECT name FROM tbGroup ORDER BY name";
+        $sql = "SELECT name, id FROM tbGroup ORDER BY name";
 
         $dados = pg_query($conn, $sql);
     ?>
@@ -24,85 +24,61 @@
                 <a class="nav-link" href="newGroup.php">Cadastrar Grupo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pesquisar Produto</a>
+                <a class="nav-link" href="searchProduct.php">Pesquisar Produto</a>
             </li>
              <li class="nav-item">
                 <a href="../logout.php" class="nav-link">Sair</a>
             </li>
         </ul>
     </header>
-    <div style="margin-top: 3rem;">
-        <form class="row gx-3 gy-2 align-items-center" action="newProduct.php" method="POST">
-            <div class="col-sm-3">
-                <label class="visually-hidden" for="specificSizeInputName">Name</label>
-                <input type="text" class="form-control" id="specificSizeInputName" placeholder="Nome do Produto" name="produto">
-            </div>
-            <div class="col-sm-3">
-                <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
-                <div class="input-group">
-                <input type="number" class="form-control" id="specificSizeInputGroupUsername" placeholder="Preço" name="preco">
-            </div>
-            </div>
-            <div class="col-sm-3">
-                <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-                <select class="form-select" id="specificSizeSelect" name="grupoProduto">
-<!--
-    codigo PHP para listar os grupos de produtos    
--->
-                <option selected>Grupo...</option>
+     <form class="row gx-3 gy-2 align-items-center" action="../scripts/newProduct_script.php" method="POST">
 
-                <?php 
-                   while($rows = pg_fetch_assoc($dados)){
-                    $name = $rows["name"];
-                    $id = $rows["id"];
+        <!-- Nome do Produto -->
+        <div class="col-sm-3">
+            <label class="visually-hidden" for="inputNomeProduto">Nome do Produto</label>
+            <input type="text" class="form-control" id="inputNomeProduto" placeholder="Nome do Produto" name="produto" required>
+        </div>
 
-                    print
-                    "
-                    <option value=$id>$name</option>
-            
-                    ";
-                   }
+        <!-- Preço -->
+        <div class="col-sm-3">
+            <label class="visually-hidden" for="inputPreco">Preço</label>
+            <div class="input-group">
+                <input type="number" step="0.01" class="form-control" id="inputPreco" placeholder="Preço" name="preco" required>
+            </div>
+        </div>
+
+        <!-- Estoque -->
+        <div class="col-sm-3">
+            <label class="visually-hidden" for="inputEstoque">Estoque</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="inputEstoque" placeholder="Estoque" name="estoque" required>
+            </div>
+        </div>
+
+        <!-- Grupo -->
+        <div class="col-sm-3">
+            <label class="visually-hidden" for="selectGrupo">Grupo</label>
+            <select class="form-select" id="selectGrupo" name="grupoProduto" required>
+
+                <?php
+
+                    while($rows = pg_fetch_assoc($dados)){
+                        $name = $rows["name"];
+                        $id = $rows["id"];
+                        echo "<option value=$name>$name</option>";
+                    }
                 ?>
+                
             </select>
-            </div>
-            <div class="col-auto">
-           
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </div>
+        </div>
+       
+        <!-- Botão -->
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+
     </form>
-
-    </div>
-
-    <?php 
-       if(isset($_POST["produto"])){
-        $product = $_POST["produto"];
-        $price = $_POST["preco"]; 
-        $group_product = $_POST["grupoProduto"];
-
-        $verify_product = "SELECT id, name FROM tbProducts WHERE name = $1";
-
-       $name_param = [$product];
-
-       $result_product = pg_query_params($conn, $verify_product, $name_param);
-
-       $num_registers = pg_num_rows($result_product);
-
-       if($num_registers == 1){
-            echo "Já existe esse produto";
-       } else {
-            $insert_product =   "INSERT INTO tbProducts (name, price, group_product) VALUES ($1, $2, $3)";
-
-            $params = [$product, $price, $group_product];
-
-            $create_Product = pg_query_params($conn, $insert_product, $params);
-
-            echo "Cadastrado com sucesso";
-       }
-       }    
-       
-       
-    ?>
+</div>
+   
 </body>
 </html>

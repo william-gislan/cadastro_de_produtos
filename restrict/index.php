@@ -17,7 +17,7 @@
                 <a class="nav-link" href="newGroup.php">Cadastrar Grupo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search_produtc.php">Pesquisar Produto</a>
+                <a class="nav-link" href="searchProduct.php">Pesquisar Produto</a>
             </li>
             <li class="nav-item">
                 <a href="../logout.php" class="nav-link">Sair</a>
