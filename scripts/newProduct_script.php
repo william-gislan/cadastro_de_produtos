@@ -26,7 +26,9 @@
 
             $create_Product = pg_query_params($conn, $insert_product, $params);
 
-            header("location:newProduct.php");
+            header("location:../restrict/newProduct.php");
+           
+       
        }
        }    
        

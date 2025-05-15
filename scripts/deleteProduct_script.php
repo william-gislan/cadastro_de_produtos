@@ -1,17 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
 <?php 
     require_once "../connection/connection.php";
+    require_once "../funcs/delet_alert.php";
 
     $id = $_POST['id'];
-    $name = $_POST['name'];
+   
 
     $sql =  "DELETE FROM tbproducts WHERE id = $1";
 
     $param = [(int)$id];
 
     if(pg_query_params($conn, $sql, $param)){
-        echo "excluído com sucesso";
+        delete_alert('Excluído com sucesso', 'success');
     } else {
-        echo "Não foi possível excluir";
+        delete_alert('Não foi possível excluir', 'danger');
     };
 
 ?>
+</body>
+</html>

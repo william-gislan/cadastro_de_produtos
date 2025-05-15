@@ -28,6 +28,7 @@
         <?php 
          
          require_once "../connection/connection.php";
+        
 
             $search = $_GET["search"] ?? "";
 
@@ -71,8 +72,9 @@
                     <td>$group</td> 
                     <td>$stock</td>
                     <td>
-                    <a class='btn btn-danger' href='#' role='button' onclick = \"getData($id, $name)\">Excluir</a>
-                    <a class='btn btn-primary' href='#' role='button'>Editar</a>
+                    <a class='btn btn-danger' href='#' role='button' data-bs-toggle='modal' data-bs-target='#confirm' onclick=\"pegarDados($id,'$name')\">Excluir</a>
+
+                    <a class='btn btn-primary' href='../cadastro_produtos/scripts/editProduct_script.php?id=$id role='button'>Editar</a>
                     </td>
                 </tr>
             ";
@@ -83,15 +85,26 @@
 </table>
 
         <!-- Modal -->
-
-
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+      <div class="modal-body">
+        <p id=nameProduct></p>
+      </div>
+      <form style="margin-left: 5px; padding-bottom:5px" action="../scripts/deleteProduct_script.php" method="POST">
+        <input type="hidden" name="id" id="id" value="">
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>
          <script>
-            const getData = (id, name) => {
+            const pegarDados = (id, name) => {
                 document.getElementById("id").value = id;
+                document.getElementById("nameProduct").textContent = `Deseja excluir ${name}?`;
             }
-
          </script>
-
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>
