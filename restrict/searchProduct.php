@@ -66,7 +66,7 @@
             $group = $row["group_product"];
             $stock = $row["stock"];
             print
-            "     <tr>
+            "     <tr> 
                     <th scope='row'>$name</th>
                     <td>$price</td>
                     <td>$group</td> 
@@ -74,11 +74,12 @@
                     <td>
                     <a class='btn btn-danger' href='#' role='button' data-bs-toggle='modal' data-bs-target='#confirm' onclick=\"pegarDados($id,'$name')\">Excluir</a>
 
-                    <a class='btn btn-primary' href='../cadastro_produtos/scripts/editProduct_script.php?id=$id role='button'>Editar</a>
+                    <a class='btn btn-primary' href='./editProduct.php?id=$id role='button'>Editar</a>
                     </td>
                 </tr>
             ";
         }
+    
     ?>
     
   </tbody>

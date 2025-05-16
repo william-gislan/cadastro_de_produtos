@@ -6,6 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Olá</h1>
+    
+    <?php 
+        require_once "../connection/connection.php";
+        
+        $id = $_POST["id"];
+        $name = $_POST["produto"];
+        $price = $_POST["preco"];
+        $stock = $_POST["estoque"];
+        $group = $_POST["grupoProduto"];
+
+
+        $sql = "UPDATE tbproducts SET
+            name = $1,
+            price = $2,
+            group_product = $3,
+            stock = $4
+
+            WHERE id = $5;
+        ";
+
+        $params = [$name, $price, $group, $stock, $id];
+
+        $edit_product = pg_query_params($conn, $sql, $params);
+        header("location:../restrict/searchProduct.php");
+
+    ?>
+
 </body>
 </html>
