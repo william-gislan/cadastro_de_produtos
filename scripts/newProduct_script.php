@@ -18,18 +18,23 @@
        $num_registers = pg_num_rows($result_product);
 
        if($num_registers == 1){
-            echo "Já existe esse produto";
+            echo $produto_existente = json_encode(array("mensagem" => "Produto ja existe"));
        } else {
-            $insert_product =   "INSERT INTO tbProducts (name, price, group_product, stock) VALUES ($1, $2, $3, $4)";
+            $insert_product =   "INSERT INTO tbProducts (name, price, idgroup, stock) VALUES ($1, $2, $3, $4)";
 
             $params = [$product, $price, $group_product, $stock];
 
             $create_Product = pg_query_params($conn, $insert_product, $params);
 
+            
+            $json_sucesso = array(
+               "mensagem" => "Produto Cadastrado com sucesso"
+            );
+            $json_retorno = json_encode($json_sucesso);
+            echo $json_retorno;
             header("location:../restrict/newProduct.php");
            
-       
-       }
-       }    
+          }
+     };
        
     ?>

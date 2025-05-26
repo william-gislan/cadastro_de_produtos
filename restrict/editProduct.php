@@ -52,11 +52,12 @@
             <select class="form-select" id="selectGrupo" name="grupoProduto" >
 
                 <?php
-                    $sql = "SELECT name FROM tbgroup ORDER BY name;";
+                    $sql = "SELECT name, id FROM tbgroup ORDER BY name;";
                     $group = pg_query($conn, $sql);
                     while($rows = pg_fetch_assoc($group)){
                         $name = $rows["name"];
-                        echo "<option value=$name>$name</option>";
+                        $id = $rows["id"];
+                        echo "<option value=$id>$name</option>";
                     }
                 ?>
             </select>

@@ -10,6 +10,9 @@
     <head>
        <ul class="nav justify-content-center">
             <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.php">Ínicio</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="newProduct.php">Cadastar Produto</a>
             </li>
             <li class="nav-item">

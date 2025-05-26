@@ -20,7 +20,7 @@
         $sql = "UPDATE tbproducts SET
             name = $1,
             price = $2,
-            group_product = $3,
+            idgroup = $3,
             stock = $4
 
             WHERE id = $5;

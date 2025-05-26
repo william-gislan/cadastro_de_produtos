@@ -18,6 +18,9 @@
     ?>
         <ul class="nav justify-content-center">
             <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.php">Ínicio</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="newProduct.php">Cadastar Produto</a>
             </li>
             <li class="nav-item">
@@ -65,13 +68,12 @@
                     while($rows = pg_fetch_assoc($dados)){
                         $name = $rows["name"];
                         $id = $rows["id"];
-                        echo "<option value=$name>$name</option>";
+                        echo "<option value=$id>$name</option>";
                     }
                 ?>
                 
             </select>
         </div>
-       
         <!-- Botão -->
         <div class="col-auto">
             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -79,6 +81,6 @@
 
     </form>
 </div>
-   
+
 </body>
 </html>

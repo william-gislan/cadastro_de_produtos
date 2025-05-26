@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: auto;
+}
+
+form{
+
+    background-color: rgb(240, 236, 241);
+     max-width: 100%;
+     padding: 5px;
+}

@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-</head>
+      <link rel="stylesheet" href="style.css">
+    </head>
 <body>
     <header>
     <div class="container" style="display: flex; flex-direction:column; align-items:center; gap:1rem">
         <ul class="nav justify-content-center">
+          <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.php">Ínicio</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="newProduct.php">Cadastar Produto</a>
             </li>
@@ -28,11 +32,21 @@
         <?php 
          
          require_once "../connection/connection.php";
-        
-
+      
             $search = $_GET["search"] ?? "";
 
-            $sql = "SELECT * FROM tbproducts WHERE name LIKE '%$search%'";
+            $sql = "SELECT 
+              tbproducts.id AS id,
+              tbproducts.name AS name,
+              tbproducts.price AS price,
+              tbproducts.stock As stock,
+              tbgroup.name AS group
+            FROM
+             tbproducts
+            JOIN
+              tbgroup ON tbproducts.idgroup = tbgroup.id
+            WHERE tbproducts.name LIKE '%$search%'; 
+             ";
 
             $params = [$search];
 
@@ -41,7 +55,7 @@
         ?>
      <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                    <form class="d-flex" role="search" action="search_produtc.php" method="GET">
+                    <form class="d-flex" role="search" action="searchProduct.php" method="GET">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" autofocus/>
                         <button class="btn btn-outline-success" type="submit">Pesquisar</button>
                     </form>
@@ -63,7 +77,7 @@
             $id = $row["id"];
             $name = $row["name"];
             $price = $row["price"];
-            $group = $row["group_product"];
+            $group = $row["group"];
             $stock = $row["stock"];
             print
             "     <tr> 
@@ -104,7 +118,7 @@
             const pegarDados = (id, name) => {
                 document.getElementById("id").value = id;
                 document.getElementById("nameProduct").textContent = `Deseja excluir ${name}?`;
-            }
+            };
          </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
