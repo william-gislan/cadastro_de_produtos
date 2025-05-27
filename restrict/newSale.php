@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="../funcs/buscarCliente.js"></script>
+    </head>
 <body>
-
+  
+   
     <form class="row g-3">
   <div class="col-md-3">
     <label for="" class="form-label">Cliente</label>
-    <input type="email" class="form-control" id="cliente">
+    <input type="text" class="form-control" id="cliente">
     <div class="col-12">
      <a class='btn btn-primary' href='#' role='button' data-bs-toggle='modal' data-bs-target='#buscar_cliente'>Buscar</a>
   </div>
   </div>
   <div class="col-md-3">
-    <label for="inputPassword4" class="form-label">Produto</label>
-    <input type="password" class="form-control" id="inputPassword4">
+    <label for="inputProduct" class="form-label">Produto</label>
+    <input type="text" class="form-control" id="inputProduct">
   </div>
   <div class="col-2">
     <label for="inputAddress" class="form-label">Quantidade</label>
@@ -68,7 +70,7 @@
       </div>
       <div class="modal-body">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="nome_cliente" autofocus/>
-            <button class="btn btn-secondary" type="button" onclick="buscarCliente()">Pesquisar</button>
+            <button class="btn btn-secondary" type="button" onclick="buscarCliente('nome_cliente', 'tabela_cliente', 'cliente', 'btn_close', 'buscar_cliente')">Pesquisar</button>
  
           <table class="table" id="tabela_cliente">
           <thead>
@@ -76,8 +78,7 @@
               
               <th scope="col">Nome</th>
               <th scope="col">CPF/CNPJ</th>
-              <th scope="col">Selecionar</th>
-              
+              <th scope="col">Selecionar</th> 
              
             </tr>
           </thead>
@@ -91,10 +92,8 @@
 </div>
 
   <script>
-    let id = 0;
-    async function buscarCliente(){
+    /*async function buscarCliente(){
       const nomePessoa = document.getElementById("nome_cliente").value;
-      const modalCliente = document.getElementById("buscar_cliente");
       const tabelaCliente = document.getElementById("tabela_cliente").getElementsByTagName("tbody")[0];
       const inputCliente = document.getElementById("cliente");
       
@@ -116,12 +115,7 @@
           
           btnAcao.textContent = "Selecionar";
           btnAcao.className = "btn btn-primary";
-          btnAcao.addEventListener("click", () => {
-          inputCliente.value = cliente.nome;
-          modalCliente.hide();
-          bootstrap.Modal.getInstance(modalCliente).hide();
-          });
-
+          
           let celulaNome = document.createElement("td");
           celulaNome.textContent = cliente.nome;
 
@@ -133,6 +127,12 @@
           novaLinha.appendChild(btnAcao);
 
           tabelaCliente.appendChild(novaLinha);
+
+           btnAcao.addEventListener("click", () => {
+            inputCliente.value = cliente.nome;
+            modalBuscarCliente = bootstrap.Modal.getInstance(document.getElementById("buscar_cliente"));
+            modalBuscarCliente.hide();
+          });
           
         });
           
@@ -140,7 +140,7 @@
         console.error(error.mensagem);
       }
 
-    }
+    }*/
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script> 

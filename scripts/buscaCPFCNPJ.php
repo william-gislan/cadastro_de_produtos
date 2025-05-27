@@ -2,7 +2,7 @@
     header('Content-Type: application/json');
     require_once "../connection/connection.php";
 
-        $tipo_pessoa = $_GET["tipoPessoa"] ?? "";
+        $tipo_pessoa = $_GET["tipoCPFCNPJ"] ?? "";
         $nome_pessoa = $_GET["nomePessoa"] ?? "";
 
 
@@ -21,7 +21,7 @@
             echo $json_sem_cliente;
         } else {
             while($row = pg_fetch_assoc($consulta)){
-            $dados = array([
+            $dados[] = array(
                 "id" => $row["id"],
                 "nome" => $row["nome"],
                 "cpf" => $row["cpf"],
@@ -33,9 +33,10 @@
                 "rua" =>    $row["rua"],
                 "numero_local" => $row["numero_local"],
                 "uf" => $row["uf"]
-            ]);
+            );
+          
+        };
             $json_dados = json_encode($dados);
             echo $json_dados;
         };
-        }
 ?>

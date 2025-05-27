@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-     <link rel="stylesheet" href="./styles/clientStyles/newClient.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/clientStyles/newClient.css">
+    <script src="../funcs/consultaCEP.js"></script>
+    <script src="../funcs/buscarCliente.js"></script>
     </head>
 
      <?php 
@@ -39,7 +40,7 @@
         </div>
 
         <div class="col-sm-3">
-                <button type="button" class="btn btn-secondary" onclick="buscarCliente()">Buscar Cliente</a>
+                <button type="button" class="btn btn-secondary" onclick="buscarCpfCnpj('tipoPessoa', 'input', 'cliente', 'email', 'fone', 'cep', 'cidade', 'bairro', 'rua', 'numero', 'uf')">Buscar Cliente</a>
         </div>
 
         <div class="col-sm-3">
@@ -55,7 +56,7 @@
         </div>
          
         <div class="col-sm-3">
-                <button type="button" class="btn btn-secondary" id="mostrar" onclick="consultaCep()">Buscar CEP</button>
+                <button type="button" class="btn btn-secondary" id="mostrar" onclick="preencheEndereco('cep', 'rua', 'cidade', 'bairro', 'uf')">Buscar CEP</button>
         </div>
 
         <div class="col-sm-3">
@@ -95,7 +96,7 @@
     
     <script>
 
-      async function buscarCliente(){
+      /*async function buscarCliente(){
                 let tipoPessoa = document.getElementById("tipoPessoa").value;
                 if(tipoPessoa === "") {
                         alert("Insira o CPF/CNPJ");
@@ -133,25 +134,9 @@
                 };      
         }
     
-        function preencheEndereco(endereco){
-            document.getElementById("rua").value = endereco.logradouro;
-            document.getElementById("cidade").value = endereco.localidade;
-            document.getElementById("bairro").value = endereco.bairro;
-            document.getElementById("uf").value = endereco.uf;
-        }
-
-
-        async function consultaCep () {
-          let cep = document.getElementById("cep").value;
-          let url = `https://viacep.com.br/ws/${cep}/json/`;
-
-          const dados = await fetch(url);
-          const endereco = await dados.json();
-          
-          preencheEndereco(endereco);
-        }
-
        
+
+       */
         
     </script>
 
