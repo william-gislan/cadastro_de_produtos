@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <script src="../funcs/buscarCliente.js"></script>
     <script src="../funcs/buscarProduto.js"></script>
+    <script src="../funcs/adicionarNagrade.js"></script>
     </head>
 <body>
   
@@ -37,26 +38,22 @@
  
   
   <div class="col-12">
-    <button type="button" class="btn btn-secondary">Adicionar</button>
+    <button type="button" class="btn btn-secondary" onclick="adicionarNaGrade('cliente', 'produto','quantidade', 'preco', 'tabela_de_produtos' )">Adicionar</button>
   </div>
 
-  <table class="table">
+  <table class="table" id="tabela_de_produtos">
   <thead>
     <tr>
       <th scope="col">Produto</th>
       <th scope="col">Quantidade</th>
       <th scope="col">Preço</th>
+      <th scope="col">Valor total</th>
+      <th scope="col">Excluir</th>
      
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      
-    </tr>
- 
+
   </tbody>
 </table>
 
