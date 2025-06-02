@@ -29,7 +29,7 @@
   </div>
   <div class="col-2">
     <label for="inputAddress" class="form-label">Quantidade</label>
-    <input type="text" class="form-control" id="quantidade" placeholder="">
+    <input type="number" class="form-control" id="quantidade" placeholder="">
   </div>
    <div class="col-2">
     <label for="inputAddress" class="form-label">Preço</label>
@@ -102,7 +102,7 @@
       </div>
       <div class="modal-body">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="nome_produto" autofocus/>
-            <button class="btn btn-secondary" type="button" onclick="buscarProduto('nome_produto','tabela_produto', 'produto', 'btn_close', 'buscar_produto')">Pesquisar</button>
+            <button class="btn btn-secondary" type="button" onclick="buscarProduto('nome_produto', 'tabela_produto', 'produto', 'preco', 'buscar_produto')">Pesquisar</button>
  
           <table class="table" id="tabela_produto">
           <thead>

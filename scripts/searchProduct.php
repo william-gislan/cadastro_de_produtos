@@ -1,5 +1,6 @@
 <?php 
     require_once "../connection/connection.php";
+    header('Content-Type: application/json');
 
     $nome_produto = $_GET["nomeProduto"];
 

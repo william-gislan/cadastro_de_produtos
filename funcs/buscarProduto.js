@@ -1,23 +1,15 @@
-async function buscarProduto(nome, tabela, input,btnClose, buscarProduto) {
-   const nomeProduto = document.getElementById(nome).value;
+async function buscarProduto(nome, tabela, input, preco, buscarProduto) {
+   let nomeProduto = document.getElementById(nome);
    const tabelaProduto = document.getElementById(tabela).getElementsByTagName("tbody")[0];
    const inputProduto = document.getElementById(input);
-   
-    
-   const convertendoLetraMaiuscula = nomeProduto.toUpperCase();
-   
+   const inputPreco = document.getElementById(preco);
 
     
-    document.getElementById(btnClose).addEventListener("click", () => {
-        //
-    });
-
-
     try {
         
-        const response = await fetch(`../scripts/searchProduct.php?nomeProduto=${decodeURIComponent(nomeProduto)}`);
+        const response = await fetch(`../scripts/searchProduct.php?nomeProduto=${decodeURIComponent(nomeProduto.value)}`);
         const data = await response.json();
-
+        sessionStorage.setItem('arrayProduto', JSON.stringify(data));
         console.log(data);
 
         if(data.mensagem){
@@ -52,13 +44,18 @@ async function buscarProduto(nome, tabela, input,btnClose, buscarProduto) {
 
             btnAcao.addEventListener("click", () => {
                 inputProduto.value = produto.nome;
+                inputPreco.value = produto.preco;
                 modalBuscarProduto = bootstrap.Modal.getInstance(document.getElementById(buscarProduto));
                 modalBuscarProduto.hide();
-            });
-        });
-        }
+                tabelaProduto.innerHTML = "";
+                nomeProduto.value = "";
 
+               
+            });
+            
+        });
         
+        }
     } catch (error) {
         console.error(error.mensage);
     }
